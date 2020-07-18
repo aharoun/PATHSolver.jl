@@ -15,7 +15,7 @@ else
     error("PATHSolver not properly installed. Please re-build PATHSolver.")
 end
 
-export solveMCP, solveLCP, options
+export solveMCP, solveLCP, options, remove_option_file
 
 # Global function pointers for the user-supplied function and jacobian evaluators.
 const user_f = Ref(FunctionWrapper{Vector{Cdouble}, Tuple{Vector{Cdouble}}}(identity))
@@ -295,7 +295,7 @@ function solveLCP(f_eval::Function, M::AbstractMatrix,
            Ptr{Cvoid}, Ptr{Cvoid}),
            n, nnzs, z, f, lb, ub, var_name, con_name, f_user_cb, j_user_cb)
 
-  remove_option_file()
+  #remove_option_file()
   return status[t], z, f
 end
 
